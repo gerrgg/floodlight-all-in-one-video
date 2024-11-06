@@ -21,6 +21,7 @@ require_once FLOODLIGHT_VIDEO_PATH . 'youtube.php';
 require_once FLOODLIGHT_VIDEO_PATH . 'vimeo.php';
 require_once FLOODLIGHT_VIDEO_PATH . 'mp4.php';
 require_once FLOODLIGHT_VIDEO_PATH . 'shortcode.php';
+require_once FLOODLIGHT_VIDEO_PATH . 'cloudflare-upload.php';
 
 // Hook into WordPress init action to register custom post type
 add_action('init', 'create_aio_video_post_type');

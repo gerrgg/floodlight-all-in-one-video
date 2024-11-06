@@ -1,0 +1,70 @@
+#fld-video-upload {
+	position: relative;
+	border: dashed 2px #aaaaff;
+}
+#fld-video-upload.active-drag {
+	border-color: #3333ff;
+}
+#fld-video-upload .progress {
+	pointer-events: none;
+}
+#fld-video-upload:before {
+	content: ' ';
+	display: block;
+	padding-top: 56.25%;
+}
+#fld-video-upload .label {
+	position: absolute;
+	z-index: 20;
+	top: 50%;
+	left: 30px;
+	right: 30px;
+	text-align: center;
+	transform: translateY(-50%);
+	margin: 0;
+	word-break: break-all;
+}
+#btn-fld-video-upload {
+	-webkit-appearance: none;
+	border: none;
+	background: none;
+}
+#fld-video-upload:not(.video-preview) #btn-fld-video-upload {
+	cursor: pointer;
+	transition: 0.3s;
+}
+#fld-video-upload:not(.video-preview) #btn-fld-video-upload:hover {
+	color: #2271b1;
+}
+#fld-video-upload video {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+#fld-video-upload.video-preview {
+	border: solid 1px #000 !important;
+}
+#fld-video-upload.video-preview .label {
+	text-shadow: 0px 0px 3px rgba(255,255,255,0.8);
+	font-size: 300%;
+}
+#fld-video-upload.video-preview button.upload {
+	display: inline-block;
+}
+#fld-video-upload .progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background: #0000ff;
+	z-index: 10;
+	width:0%;
+	opacity: 0.5;
+	transition: 0.3s;
+}
+#fld-video-cancel-upload {
+	display: none;
+}
