@@ -5,8 +5,8 @@
 	//acf field
 	//cron job to remove 'waiting for upload' status of a certain age
 	class cloudflareUpload {
-		const API_KEY = 'XuNYA_QSZ14-Ei644A9pgeZnUgDJRx4RAuIcCne4';
-		const ACCOUNT_ID = '48a026aca6318f6152db520799c95956';
+    private $api_key;
+    private $account_id;
 
 		function __construct() {
 			add_action('init', array($this, 'create_post_type'));
@@ -19,6 +19,10 @@
 
 			add_action('manage_fld_video_posts_custom_column', array($this, 'posts_column_data'), 10, 2);
 			add_filter('manage_fld_video_posts_columns', array($this, 'posts_columns'));
+
+      $this->api_key = get_option('cloudflare_api_token');
+      $this->account_id = get_option('cloudflare_account_id');
+
 		}
 
 		public function posts_column_data($column, $post_id) {
@@ -65,10 +69,10 @@
 			$video_id = get_post_meta($post_id, '_uploading_video_id', true);
 
 			$headers = array();
-			$headers[] = 'Authorization: Bearer ' . self::API_KEY;
+			$headers[] = 'Authorization: Bearer ' . $this->api_key;
 			$headers[] = 'Content-Type:application/json';
 
-			$url = 'https://api.cloudflare.com/client/v4/accounts/' . self::ACCOUNT_ID . '/stream/' . $video_id;
+			$url = 'https://api.cloudflare.com/client/v4/accounts/' . $this->account_id . '/stream/' . $video_id;
 			$curl = curl_init( $url );
 			
 			curl_setopt($curl, CURLOPT_URL, $url);			
@@ -116,14 +120,14 @@
 			//$metadata .= ',expiry ' . base64_encode(gmdate('Y-m-d\TH:i:sP', strtotime("+180 seconds")));
 
 			$headers = array();
-			$headers[] = 'Authorization: Bearer ' . self::API_KEY;
+			$headers[] = 'Authorization: Bearer ' . $this->api_key;
 			$headers[] = 'Content-Type:application/json';
 			$headers[] = 'Tus-Resumable: 1.0.0';
 			$headers[] = 'Upload-Length: ' . $filesize;
 			$headers[] = 'Upload-Metadata: ' . $metadata;
 
 
-			$url = 'https://api.cloudflare.com/client/v4/accounts/' . self::ACCOUNT_ID . '/stream?direct_user=true';
+			$url = 'https://api.cloudflare.com/client/v4/accounts/' . $this->account_id . '/stream?direct_user=true';
 			$curl = curl_init( $url );
 			curl_setopt($curl, CURLOPT_URL, $url);
 			curl_setopt( $curl, CURLOPT_POST, true );
@@ -220,7 +224,7 @@
 
 		public function create_post_type() {
 			register_post_type('fld_video', array(
-				'label' => 'Cloudflare Videos',
+				'label' => 'Upload Cloudflare',
 				'show_ui' => true,
 				'menu_icon' => 'dashicons-video-alt2',
 				'supports' => array('title', 'revisions'),
@@ -380,3 +384,5 @@
 	}
 
 	new cloudflareUpload();
+
+  

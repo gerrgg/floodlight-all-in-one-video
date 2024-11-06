@@ -75,4 +75,54 @@ function my_plugin_enqueue_styles() {
   );
 }
 
+// Hook into the admin menu to add a settings page
+add_action('admin_menu', 'aio_video_settings_page');
 
+function aio_video_settings_page() {
+  add_submenu_page(
+    'edit.php?post_type=aio_video',      // Parent slug
+    'API Settings',                      // Page title
+    'API Settings',                      // Menu title
+    'manage_options',                    // Capability required
+    'aio_video_settings',                // Menu slug
+    'aio_video_settings_page_html'       // Callback function to display the page content
+  );
+}
+
+function aio_video_settings_page_html() {
+  // Check if the user is allowed to access this page
+  if (!current_user_can('manage_options')) {
+    return;
+  }
+
+  // Save settings if form is submitted
+  if (isset($_POST['aio_video_save_settings'])) {
+    update_option('cloudflare_api_token', sanitize_text_field($_POST['cloudflare_api_token']));
+    update_option('cloudflare_account_id', sanitize_text_field($_POST['cloudflare_account_id']));
+    echo '<div class="updated"><p>Settings saved.</p></div>';
+  }
+
+  // Retrieve current settings
+  $api_token = get_option('cloudflare_api_token', '');
+  $account_id = get_option('cloudflare_account_id', '');
+
+  // HTML for the settings form
+  ?>
+  <div class="wrap">
+    <h1><?php esc_html_e('Floodlight Cloudflare API Settings', 'textdomain'); ?></h1>
+    <form method="post" action="">
+      <table class="form-table">
+        <tr valign="top">
+          <th scope="row"><label for="cloudflare_api_token"><?php esc_html_e('Cloudflare API Token', 'textdomain'); ?></label></th>
+          <td><input type="text" id="cloudflare_api_token" name="cloudflare_api_token" value="<?php echo esc_attr($api_token); ?>" class="regular-text" /></td>
+        </tr>
+        <tr valign="top">
+          <th scope="row"><label for="cloudflare_account_id"><?php esc_html_e('Cloudflare Account ID', 'textdomain'); ?></label></th>
+          <td><input type="text" id="cloudflare_account_id" name="cloudflare_account_id" value="<?php echo esc_attr($account_id); ?>" class="regular-text" /></td>
+        </tr>
+      </table>
+      <?php submit_button('Save Settings', 'primary', 'aio_video_save_settings'); ?>
+    </form>
+  </div>
+  <?php
+}
