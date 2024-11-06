@@ -137,32 +137,29 @@ function create_acf_field_group_for_aio_video() {
                 'mime_types' => '',
               ),
               array(
-                'key' => 'field_my_file_cloudflare',
-                'label' => 'Video File',
-                'name' => 'my_file_cloudflare',
-                'type' => 'file',
-                'return_format' => 'ID', // This ensures the URL is returned
-                'instructions' => 'Upload a to Cloudflare Video',
-                'required' => 0,
-                'conditional_logic' => 0,
+                'key' => 'field_my_file_cloudflare', // Field key
+                'label' => 'Video File',             // Field label
+                'name' => 'my_file_cloudflare',      // Field name
+                'type' => 'post_object',             // Field type changed to post selector
+                'post_type' => array('fld_video'),   // Restrict to selecting 'fld_video' posts
+                'return_format' => 'id',             // Return the post ID (or 'object' if you need the full post object)
+                'instructions' => 'Select a Cloudflare Video from the list.', // Instructions for the user
+                'required' => 0,                     // Whether the field is required
+                'conditional_logic' => 0,            // No conditional logic for this example
                 'wrapper' => array(
                     'width' => '',
                     'class' => '',
                     'id' => '',
                 ),
-                'conditional_logic' => array( // Conditional logic for the field
-                      array(
-                          array(
-                              'field' => 'field_button_group', // Reference to the button group field
-                              'operator' => '==',             // Logic operator (options: '==', '!=', '>', '<', '>=', '<=')
-                              'value' => 'cloudflare',              // Value to check (if not 'mp4')
-                          ),
-                      ),
-                  ),
-                'library' => 'all',
-                'min_size' => '',
-                'max_size' => '',
-                'mime_types' => '',
+                'conditional_logic' => array(       // Conditional logic for the field (optional)
+                    array(
+                        array(
+                            'field' => 'field_button_group',  // Reference to the button group field
+                            'operator' => '==',               // Logic operator
+                            'value' => 'cloudflare',          // Value to trigger this logic
+                        ),
+                    ),
+                ),
               ),
               array(
                 'key' => 'field_background',
@@ -199,7 +196,15 @@ function create_acf_field_group_for_aio_video() {
                 'type' => 'true_false',
                 'instructions' => 'Enable autoplay for the video',
                 'required' => 0,
-                'conditional_logic' => 0,
+                'conditional_logic' => array( // Conditional logic for the field
+                  array(
+                    array(
+                        'field' => 'field_button_group', // Reference to the button group field
+                        'operator' => '==',             // Logic operator (options: '==', '!=', '>', '<', '>=', '<=')
+                        'value' => 'mp4',              // Value to check (if not 'mp4')
+                    ),
+                  ),
+                ),
                 'wrapper' => array(
                   'width' => '',
                   'class' => '',
@@ -255,6 +260,15 @@ function create_acf_field_group_for_aio_video() {
                 'max_height' => '',           // Maximum height of image
                 'max_size' => '',             // Maximum file size
                 'mime_types' => '',           // Allowed mime types
+                'conditional_logic' => array( // Conditional logic for the field
+                  array(
+                    array(
+                        'field' => 'field_button_group', // Reference to the button group field
+                        'operator' => '!=',             // Logic operator (options: '==', '!=', '>', '<', '>=', '<=')
+                        'value' => 'cloudflare',              // Value to check (if not 'mp4')
+                    ),
+                  ),
+                ),
               ),
               array(
                 'key' => 'field_play_icon',    // Unique key for the image field

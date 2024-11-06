@@ -31,9 +31,13 @@
 		}
 
 		public static function get_thumbnail_for_video($video_id, $extra_style = "") {
-
 			return '<img src="https://videodelivery.net/' . $video_id . '/thumbnails/thumbnail.gif?time=0s&width=250&duration=4s&fit=clip" style="max-width:100%;height:auto;' . $extra_style . '" width="250" alt="Video Thumbnail">';
 		}
+
+    public static function get_thumbnail_url_for_video($video_id, $width = 250) {
+			return 'https://videodelivery.net/' . $video_id . '/thumbnails/thumbnail.gif?time=0s&width='. $width .'&duration=4s&fit=clip';
+		}
+
 		public static function get_thumbnail_for_post($post_id, $extra_style = "") {
 			$video_id = get_post_meta($post_id, '_video_id', true);
 			if ($video_id) {

@@ -22,6 +22,7 @@ require_once FLOODLIGHT_VIDEO_PATH . 'vimeo.php';
 require_once FLOODLIGHT_VIDEO_PATH . 'mp4.php';
 require_once FLOODLIGHT_VIDEO_PATH . 'shortcode.php';
 require_once FLOODLIGHT_VIDEO_PATH . 'cloudflare-upload.php';
+require_once FLOODLIGHT_VIDEO_PATH . 'cloudflare.php';
 
 // Hook into WordPress init action to register custom post type
 add_action('init', 'create_aio_video_post_type');
@@ -47,6 +48,7 @@ function aio_video_enqueue_scripts() {
   wp_register_script('aio-youtube', plugin_dir_url(__FILE__) . '/js/youtube.js', array('jquery'), '1.0.0', true);
   wp_register_script('aio-vimeo', plugin_dir_url(__FILE__) . '/js/vimeo.js', array('jquery'), '1.0.0', true);
   wp_register_script('aio-mp4', plugin_dir_url(__FILE__) . '/js/mp4.js', array('jquery'), '1.0.0', true);
+  wp_register_script('aio-cloudflare', plugin_dir_url(__FILE__) . '/js/cloudflare.js', array('jquery'), '1.0.0', true);
   wp_register_script('aio-vimeo-sdk', 'https://player.vimeo.com/api/player.js', array('jquery'), '1.0.0', true);
 }
 
@@ -68,7 +70,7 @@ function my_plugin_enqueue_styles() {
     'my-plugin-style', // Handle for the stylesheet
     plugin_dir_url(__FILE__) . 'style.css', // Path to the stylesheet
     array(), // Dependencies (optional)
-    '1.0', // Version number (optional)
+    time(), // Version number (optional)
     'all' // Media type (optional, defaults to 'all')
   );
 }
