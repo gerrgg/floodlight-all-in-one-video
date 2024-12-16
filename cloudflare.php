@@ -23,7 +23,7 @@ function _render_fld_video_cloudflare($video){
   printf(
     '<div class="aio-video-wrapper %s cloudflare" style="padding-top: %s;">
       <img class="poster" src="%s" />
-      <iframe src="%s?autoplay=true&muted=true&loop=true" width="%s" height="%s" allow="autoplay"></iframe>
+      <iframe src="%s?autoplay=true&muted=true&loop=true" width="%s" height="%s" allow="autoplay" playsinline></iframe>
     </div>',
     $background ? 'background' : '',
     $aspect_ratio,

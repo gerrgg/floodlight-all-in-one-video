@@ -45,10 +45,10 @@ add_action('wp_enqueue_scripts', 'my_plugin_enqueue_styles');
 
 function aio_video_enqueue_scripts() {
   // Register the script
-  wp_register_script('aio-youtube', plugin_dir_url(__FILE__) . '/js/youtube.js', array('jquery'), '1.0.0', true);
-  wp_register_script('aio-vimeo', plugin_dir_url(__FILE__) . '/js/vimeo.js', array('jquery'), '1.0.0', true);
-  wp_register_script('aio-mp4', plugin_dir_url(__FILE__) . '/js/mp4.js', array('jquery'), '1.0.0', true);
-  wp_register_script('aio-cloudflare', plugin_dir_url(__FILE__) . '/js/cloudflare.js', array('jquery'), '1.0.0', true);
+  wp_register_script('aio-youtube', plugin_dir_url(__FILE__) . 'js/youtube.js', array('jquery'), '1.0.0', true);
+  wp_register_script('aio-vimeo', plugin_dir_url(__FILE__) . 'js/vimeo.js', array('jquery'), '1.0.0', true);
+  wp_register_script('aio-mp4', plugin_dir_url(__FILE__) . 'js/mp4.js', array('jquery'), '1.0.0', true);
+  wp_register_script('aio-cloudflare', plugin_dir_url(__FILE__) . 'js/cloudflare.js', array('jquery'), '1.0.0', true);
   wp_register_script('aio-vimeo-sdk', 'https://player.vimeo.com/api/player.js', array('jquery'), '1.0.0', true);
 }
 

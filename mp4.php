@@ -21,7 +21,7 @@ function _render_fld_video_mp4($video){
 
   printf(
     '<div class="aio-video-wrapper %s mp4 %s" style="padding-top: %s;">
-        <video class="%s" width="%s" height="%s" %s %s %s >
+        <video class="%s" width="%s" height="%s" %s %s %s playsinline >
           <source src="%s" type="video/mp4">
         </video> 
       <i class="play-icon" style="%s"></i>

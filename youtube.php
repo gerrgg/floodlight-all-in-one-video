@@ -11,7 +11,7 @@ function _render_fld_video_youtube($video){
   wp_enqueue_script('aio-youtube');
 
   printf(
-    '<div class="aio-video-wrapper %s" style="padding-top: %s; %s">
+    '<div class="aio-video-wrapper %s youtube" style="padding-top: %s; %s">
       <div id="%s" class="aio-video-youtube" data-delay="%s" data-videoId="%s" data-width="%s" data-height="%s" data-autoplay="%s"></div>
       <i class="play-icon" style="%s"></i>
     </div>', 

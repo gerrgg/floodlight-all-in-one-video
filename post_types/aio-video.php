@@ -97,12 +97,12 @@ function create_acf_field_group_for_aio_video() {
                     array(
                         array(
                             'field' => 'field_button_group', // Reference to the button group field
-                            'operator' => '==',             // Logic operator (options: '==', '!=', '>', '<', '>=', '<=')
+                            'operator' => '!=',             // Logic operator (options: '==', '!=', '>', '<', '>=', '<=')
                             'value' => 'mp4',              // Value to check (if not 'mp4')
                         ),
                         array(
                           'field' => 'field_button_group', // Reference to the button group field
-                          'operator' => '==',             // Logic operator (options: '==', '!=', '>', '<', '>=', '<=')
+                          'operator' => '!=',             // Logic operator (options: '==', '!=', '>', '<', '>=', '<=')
                           'value' => 'cloudflare',              // Value to check (if not 'mp4')
                       ),
                     ),
